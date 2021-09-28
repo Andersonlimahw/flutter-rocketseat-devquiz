@@ -23,10 +23,13 @@ class _HomePageState extends State<HomePage> {
               height: 24,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(6.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(
+                    height: 24,
+                  ),
                   LevelButtonWidget(label: "Fácil"),
                   LevelButtonWidget(label: "Médio"),
                   LevelButtonWidget(label: "Difícil"),
@@ -42,7 +45,8 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   QuizCardWidget(), 
                   QuizCardWidget(),
-                  QuizCardWidget()
+                  QuizCardWidget(),
+                  QuizCardWidget(),
                 ],
               ),
             ),
