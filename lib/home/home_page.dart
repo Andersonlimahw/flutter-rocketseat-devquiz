@@ -1,3 +1,4 @@
+import 'package:DevQuiz/challange/challange_page.dart';
 import 'package:DevQuiz/challange/widgets/quiz/quiz_widtget.dart';
 import 'package:DevQuiz/core/app_colors.dart';
 import 'package:DevQuiz/home/home_controller.dart';
@@ -21,11 +22,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     controller.getUser();
-    controller.getQuizzes();  
-    controller.stateNotifier.addListener(() { 
-      setState(() {
-        
-      });
+    controller.getQuizzes();
+    controller.stateNotifier.addListener(() {
+      setState(() {});
     });
   }
 
@@ -52,13 +51,10 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: 24,
                       ),
-                      
                       LevelButtonWidget(label: "Fácil"),
                       LevelButtonWidget(label: "Médio"),
                       LevelButtonWidget(label: "Difícil"),
                       LevelButtonWidget(label: "Perito"),
-
-                     
                     ],
                   ),
                 ),
@@ -67,18 +63,30 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                   child: GridView.count(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
+                    crossAxisCount: 2, // Limita dois card por vez
+                    crossAxisSpacing: 16, // Espaçamento vertical
+                    mainAxisSpacing: 16, // Espaçamento horizontal
                     children: controller.quizzes!
-                        .map((e) => QuizCardWidget(
-                            title: e.title,
-                            image: e.image,
-                            completed:
-                                "${e.questionAnswered}/${e.questions.length}",
-                            percent: e.questionAnswered / e.questions.length))
+                        .map(
+                          (e) => QuizCardWidget(
+                              title: e.title,
+                              image: e.image,
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChallangePage(),
+                                    ));
+                              },
+                              completed:
+                                  "${e.questionAnswered}/${e.questions.length}",
+                              percent: e.questionAnswered / e.questions.length),
+                        )
                         .toList(),
                   ),
+                ),
+                SizedBox(
+                  height: 36,
                 ),
               ],
             ),
@@ -86,9 +94,9 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Scaffold(
           body: Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
-          ),
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
+        ),
       ));
     }
   }
