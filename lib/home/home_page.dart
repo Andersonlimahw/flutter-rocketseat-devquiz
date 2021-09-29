@@ -16,7 +16,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final controller = HomeController();
-
+  
+  @override
   void initState() {
     super.initState();
     controller.getUser();
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     if (controller.state == HomeState.success) {
       return Scaffold(
           appBar: AppBarWidget(
-            user: controller.user!,
+            user: controller.user,
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
