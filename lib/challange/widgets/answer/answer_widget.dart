@@ -30,6 +30,8 @@ class AnswerWidget extends StatelessWidget {
 
   IconData get _selectedIconRight => isRight ? Icons.check : Icons.close;
 
+  bool get getTap => true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
