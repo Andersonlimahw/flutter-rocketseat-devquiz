@@ -9,12 +9,14 @@ class QuizCardWidget extends StatelessWidget {
   final String title;
   final String completed;
   final double percent;
+  final String image;
   
   const QuizCardWidget({
     Key? key,
     required this.title,
     required this.completed,
     required this.percent,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -38,7 +40,8 @@ class QuizCardWidget extends StatelessWidget {
             Container(
               height: 40,
               width : 40,
-              child: Image.asset(AppImages.blocks),
+              child: Image.asset("assets/images/${image}.png"),
+              // child: Image.asset(AppImages.blocks),
             ), 
             SizedBox(height: 20),
             Text(

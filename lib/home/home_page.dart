@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final controller = HomeController();
-  
+
   @override
   void initState() {
     super.initState();
@@ -47,16 +47,23 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(6.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
                         height: 24,
                       ),
+                      
                       LevelButtonWidget(label: "Fácil"),
                       LevelButtonWidget(label: "Médio"),
                       LevelButtonWidget(label: "Difícil"),
                       LevelButtonWidget(label: "Perito"),
+
+                     
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 24,
                 ),
                 Expanded(
                   child: GridView.count(
@@ -66,6 +73,7 @@ class _HomePageState extends State<HomePage> {
                     children: controller.quizzes!
                         .map((e) => QuizCardWidget(
                             title: e.title,
+                            image: e.image,
                             completed:
                                 "${e.questionAnswered}/${e.questions.length}",
                             percent: e.questionAnswered / e.questions.length))
