@@ -34,6 +34,11 @@ class _ChallangePageState extends State<ChallangePage> {
     super.initState();
   }
 
+  void nextPage() {
+    pageController.nextPage(
+        duration: Duration(milliseconds: 500), curve: Curves.easeInCubic);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,8 +57,7 @@ class _ChallangePageState extends State<ChallangePage> {
                     }),
                 ValueListenableBuilder<int>(
                   valueListenable: controller.currentPageNotifier,
-                  builder: (context, value, _) => 
-                  QuestionIndicatorWidget(
+                  builder: (context, value, _) => QuestionIndicatorWidget(
                     currentPage: value,
                     length: widget.questions.length,
                   ),
@@ -65,38 +69,38 @@ class _ChallangePageState extends State<ChallangePage> {
           physics: NeverScrollableScrollPhysics(),
           controller: pageController,
           children: widget.questions
-              .map((e) => QuizWidget(title: e.title, question: e))
+              .map((e) =>
+                  QuizWidget(title: e.title, question: e, onChange: nextPage))
               .toList()),
       bottomNavigationBar: SafeArea(
         bottom: true,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                  child: NextButtonWidget.white(
-                    label: "Pular", 
-                    onTap: () {
-                      pageController.nextPage(
-                        duration: Duration(milliseconds: 100), 
-                        curve: Curves.easeInToLinear
-                      );
-                    })
-                  ),
-              SizedBox(
-                width: 14,
-              ),
-              Expanded(
-                  child:
-                      NextButtonWidget.green(
-                        label: "Confirmar", 
+          child: ValueListenableBuilder(
+              valueListenable: controller.currentPageNotifier,
+              builder: (context, value, _) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                        child: NextButtonWidget.white(
+                        label: "Pular",
                         onTap: () {
-                          
+                          nextPage();
                         })
                       ),
-            ],
-          ),
+                      if (value == widget.questions.length)
+                        SizedBox(
+                          width: 7,
+                        ),
+                      if (value == widget.questions.length)
+                        Expanded(
+                            child: NextButtonWidget.green(
+                                label: "Confirmar",
+                                onTap: () {
+                                  Navigator.pop(context);
+                                })),
+                    ],
+                  )),
         ),
       ),
     );
