@@ -1,10 +1,17 @@
+import 'package:flutter/material.dart';
+
 import 'package:DevQuiz/challange/widgets/answer/answer_widget.dart';
 import 'package:DevQuiz/core/app_text_styles.dart';
-import 'package:flutter/material.dart';
+import 'package:DevQuiz/shared/models/question_model.dart';
 
 class QuizWidget extends StatelessWidget {
   final String title;
-  const QuizWidget({ Key? key, required this.title }) : super(key: key);
+  final QuestionModel question;
+  const QuizWidget({
+    Key? key,
+    required this.title,
+    required this.question,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +26,9 @@ class QuizWidget extends StatelessWidget {
           SizedBox(
             height: 24,
           ), 
-          AnswerWidget(title: "Pergunta 01...", isRight: true, isSelected: true),
-          AnswerWidget(title: "Pergunta 02...", isRight: false, isSelected: true),
-          AnswerWidget(title: "Pergunta 03..."),
-          AnswerWidget(title: "Pergunta 04..."),
+          ...question.answers.map((e) => 
+            AnswerWidget(title: e.title,)
+          )
         ],
       ),
     );
