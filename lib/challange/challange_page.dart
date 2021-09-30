@@ -34,10 +34,16 @@ class _ChallangePageState extends State<ChallangePage> {
     super.initState();
   }
 
+  bool canContinue (int value) => value < widget.questions.length;
+
   void nextPage() {
-    pageController.nextPage(
-        duration: Duration(milliseconds: 500), curve: Curves.easeInCubic);
+    if(canContinue(controller.currentPage))
+      pageController.nextPage(
+          duration: Duration(milliseconds: 500), 
+          curve: Curves.easeInCubic);
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -81,24 +87,22 @@ class _ChallangePageState extends State<ChallangePage> {
               builder: (context, value, _) => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      if (canContinue(controller.currentPage))
                       Expanded(
                         child: NextButtonWidget.white(
                         label: "Pular",
                         onTap: () {
                           nextPage();
                         })
-                      ),
+                      ),                      
                       if (value == widget.questions.length)
-                        SizedBox(
-                          width: 7,
-                        ),
-                      if (value == widget.questions.length)
-                        Expanded(
-                            child: NextButtonWidget.green(
-                                label: "Confirmar",
-                                onTap: () {
-                                  Navigator.pop(context);
-                                })),
+                      Expanded(
+                        child: NextButtonWidget.green(
+                            label: "Confirmar",
+                            onTap: () {
+                              Navigator.pop(context); // TODO: salvar no banco de dados sqllite
+                            })
+                          ),
                     ],
                   )),
         ),
