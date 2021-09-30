@@ -75,7 +75,7 @@ class SummaryPage extends StatelessWidget {
                   height: 8,
                 ),
                 Text(
-                  "com $result de $questionsCount perguntas.\n aproveitamento de $calculatePercetual%",
+                  "com $result de $questionsCount perguntas.\naproveitamento de $calculatePercetual%",
                   style: GoogleFonts.notoSans(
                       fontWeight: FontWeight.w400,
                       fontSize: 15,
