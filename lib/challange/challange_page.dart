@@ -37,14 +37,17 @@ class _ChallangePageState extends State<ChallangePage> {
 
   void nextPage() {
     if(canContinue(controller.currentPage))
-      controller.rightQuestionsCount = controller.rightQuestionsCount + 1;
-
       pageController.nextPage(
           duration: Duration(milliseconds: 500), 
           curve: Curves.linear);
   }
 
-  
+  void onSelected(bool value) {
+    if(value) {
+      controller.qtdAnswersRight ++;
+    }
+    nextPage();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +83,7 @@ class _ChallangePageState extends State<ChallangePage> {
                   QuizWidget(
                     title: e.title, 
                     question: e, 
-                    onChange: nextPage
+                    onSelected: onSelected
                   ))
               .toList()),
       bottomNavigationBar: SafeArea(
@@ -109,8 +112,9 @@ class _ChallangePageState extends State<ChallangePage> {
                                 context,
                                 MaterialPageRoute(builder: (context) => 
                                   SummaryPage(
-                                    answersScore: 'com ${controller.rightQuestionsCount} de ${widget.questions.length} acertos', 
+                                    questionsCount: widget.questions.length, 
                                     questionsTitle: widget.title,
+                                    result: controller.qtdAnswersRight,
                                   )
                                 )
                               );

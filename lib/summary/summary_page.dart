@@ -1,19 +1,23 @@
-import 'package:DevQuiz/challange/widgets/next_button/next_button_widget.dart';
-import 'package:DevQuiz/home/home_page.dart';
 import 'package:flutter/material.dart';
-
-import 'package:DevQuiz/core/core.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
+
+import 'package:DevQuiz/challange/widgets/next_button/next_button_widget.dart';
+import 'package:DevQuiz/core/core.dart';
 
 class SummaryPage extends StatelessWidget {
-  final String answersScore;
+  final int questionsCount;
+  final int result;
   final String questionsTitle;
 
   const SummaryPage({
     Key? key,
-    required this.answersScore,
+    required this.questionsCount,
+    required this.result,
     required this.questionsTitle,
   }) : super(key: key);
+
+  double get calculatePercetual => (result / questionsCount) * 100;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +75,7 @@ class SummaryPage extends StatelessWidget {
                   height: 8,
                 ),
                 Text(
-                  answersScore,
+                  "com $result de $questionsCount perguntas.\n aproveitamento de $calculatePercetual%",
                   style: GoogleFonts.notoSans(
                       fontWeight: FontWeight.w400,
                       fontSize: 15,
@@ -103,7 +107,10 @@ class SummaryPage extends StatelessWidget {
                     child: NextButtonWidget.purple(
                         label: "Compartilhar",
                         onTap: () {
-                          print(answersScore);
+                          Share.share(
+                            "Olá, \n Este foi o resultado do meu quiz, $questionsTitle, \n acertei $result de $questionsCount perguntas \n obtive ${calculatePercetual}% de aproveitamento.",
+                            subject: "Fluter Rocketseat : Quiz $questionsTitle"
+                          );
                         }),
                   ),
                 ),
