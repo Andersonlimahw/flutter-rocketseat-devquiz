@@ -1,19 +1,20 @@
-import 'package:DevQuiz/challange/challange_controller.dart';
-import 'package:DevQuiz/summary/summary_page.dart';
 import 'package:flutter/material.dart';
 
+import 'package:DevQuiz/challange/challange_controller.dart';
 import 'package:DevQuiz/challange/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:DevQuiz/challange/widgets/quiz/quiz_widtget.dart';
 import 'package:DevQuiz/shared/models/question_model.dart';
+import 'package:DevQuiz/summary/summary_page.dart';
 
 import 'widgets/next_button/next_button_widget.dart';
 
 class ChallangePage extends StatefulWidget {
   final List<QuestionModel> questions;
-
+  final String title;
   const ChallangePage({
     Key? key,
     required this.questions,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -25,10 +26,7 @@ class _ChallangePageState extends State<ChallangePage> {
   final pageController = PageController();
 
   @override
-  void initState() {
-    // controller.currentPageNotifier.addListener(() {
-    //   setState(() {});
-    // });
+  void initState() {    
     pageController.addListener(() {
       controller.currentPage = pageController.page!.toInt() + 1;
     });
@@ -105,8 +103,8 @@ class _ChallangePageState extends State<ChallangePage> {
                                 context,
                                 MaterialPageRoute(builder: (context) => 
                                   SummaryPage(
-                                    answersScore: 'com 6 de 10 acertos', 
-                                    questionsTitle: 'Gerenciamento de Estado',
+                                    answersScore: 'com 6 de ${widget.questions.length} acertos', 
+                                    questionsTitle: widget.title,
                                   )
                                 )
                               );
