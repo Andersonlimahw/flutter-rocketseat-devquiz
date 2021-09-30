@@ -1,4 +1,5 @@
 import 'package:DevQuiz/challange/challange_controller.dart';
+import 'package:DevQuiz/summary/summary_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:DevQuiz/challange/widgets/question_indicator/question_indicator_widget.dart';
@@ -100,7 +101,15 @@ class _ChallangePageState extends State<ChallangePage> {
                         child: NextButtonWidget.green(
                             label: "Confirmar",
                             onTap: () {
-                              Navigator.pop(context); // TODO: salvar no banco de dados sqllite
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => 
+                                  SummaryPage(
+                                    answersScore: 'com 6 de 10 acertos', 
+                                    questionsTitle: 'Gerenciamento de Estado',
+                                  )
+                                )
+                              );
                             })
                           ),
                     ],

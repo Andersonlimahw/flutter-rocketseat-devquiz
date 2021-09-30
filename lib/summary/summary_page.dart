@@ -10,8 +10,8 @@ class SummaryPage extends StatelessWidget {
 
   const SummaryPage({
     Key? key,
-    this.answersScore = "com 6 de 10 acertos",
-    this.questionsTitle = "Gerenciamento de Estado",
+    required this.answersScore,
+    required this.questionsTitle,
   }) : super(key: key);
 
   @override
