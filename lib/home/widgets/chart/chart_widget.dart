@@ -1,9 +1,14 @@
-import 'package:DevQuiz/core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:DevQuiz/core/core.dart';
+
 class ChartWidget extends StatelessWidget {
-  const ChartWidget({Key? key}) : super(key: key);
+  final double score;
+  const ChartWidget({
+    Key? key,
+    required this.score,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class ChartWidget extends StatelessWidget {
                 width: 80,
                 child: CircularProgressIndicator(
                   strokeWidth: 10,
-                  value: .75,
+                  value: score,
                   backgroundColor: AppColors.chartSecondary,
                   valueColor:
                       AlwaysStoppedAnimation<Color>(AppColors.chartPrimary),
@@ -26,7 +31,7 @@ class ChartWidget extends StatelessWidget {
           ),
           Center(
             child: Text(
-            "75%",
+            "${score}%",
             style: AppTextStyles.heading,
           ))
         ],
