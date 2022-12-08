@@ -51,14 +51,10 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 ## Dependencies
-* flutter:
 * sdk: flutter
 * cupertino_icons: ^1.0.2
-* google_fonts: ^2.1.0
+* google_fonts: ^2.0.0
 * share_plus: ^2.1.4
-* http: ^0.13.4
-* sqflite: ^2.0.0+4
-* path: ^1.8.0
 
 ## Demo
 
