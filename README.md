@@ -63,10 +63,10 @@ samples, guidance on mobile development, and a full API reference.
 ## Demo
 
 ### Home
-![alt text for screen readers](/assets/images/demo/home.PNG "home").
+![Home image](/assets/images/demo/home.PNG "home").
 
 ### Quiz
-![alt text for screen readers](/assets/images/demo/quizz.PNG "quiz").
+![Quizz image](/assets/images/demo/quizz.PNG "quiz").
 
 ### Summary
-![alt text for screen readers](/assets/images/demo/summary.PNG "home").
+![Summary image](/assets/images/demo/summary.PNG "home").
